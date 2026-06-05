@@ -11,12 +11,11 @@ public class Bomb : MonoBehaviour
         if (collidedObj.name != "Cutter") return;
 
         Knife knife = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Knife>();
+        if (knife == null || !knife.isCutting) return;
 
-        if (knife != null && knife.isCutting) {
-            hasBeenHit = true;
-            GameSystem.System.LEVEL.ApplyBombPenalty(scorePenalty);
-            StartCoroutine(ShakeBomb());
-        }
+        hasBeenHit = true;
+        GameSystem.System.LEVEL.ApplyBombPenalty(scorePenalty);
+        StartCoroutine(ShakeBomb());
     }
 
     IEnumerator ShakeBomb() {

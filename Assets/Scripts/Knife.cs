@@ -12,7 +12,7 @@ public class Knife : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        screenBounds = new Rect(0, 0, Screen.width, Screen.height - 200);
+        screenBounds = new Rect(0, 0, Screen.width+400, Screen.height - 200);
     }
 
     public void setCuttingState(bool state) {
