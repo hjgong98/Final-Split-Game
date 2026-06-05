@@ -71,6 +71,12 @@ public class Level {
         CurrentSpeed = speed;
     }
 
+    public void ApplyBombPenalty(int amount) {
+        Score -= amount;
+        Score = Mathf.Max(0, Score);
+        ScoreText.text = Score.ToString();
+    }
+
     public void OnVegetableCut() {
         IncreaseScore();
     }
