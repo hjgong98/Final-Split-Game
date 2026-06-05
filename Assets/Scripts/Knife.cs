@@ -1,10 +1,13 @@
 using UnityEngine;
 
-public class NewMonoBehaviourScript : MonoBehaviour
+public class Knife : MonoBehaviour
 {
     public Animator knifeAnimator;
     public bool isCutting;
     private Rect screenBounds;
+
+    public float timeElapsed = 0f;
+    private float clickTimeFrame = 0.1f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -21,9 +24,14 @@ public class NewMonoBehaviourScript : MonoBehaviour
     void FixedUpdate()
     {
         if(Input.GetMouseButton(0) && screenBounds.Contains(Input.mousePosition) && !isCutting) {
+            timeElapsed = 0f;
             setCuttingState(true);
         } else {
-            setCuttingState(false);
+            timeElapsed += Time.fixedDeltaTime;
+            if(timeElapsed >= clickTimeFrame && isCutting) {
+                setCuttingState(false);
+                timeElapsed = 0f;
+            }
         }
     }
 }

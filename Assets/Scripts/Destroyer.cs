@@ -4,6 +4,8 @@ public class Destroyer : MonoBehaviour
 {
     void OnTriggerEnter(Collider collidedObj)
     {
-        Destroy(collidedObj.gameObject);
+        if (collidedObj.tag == "Slice" || collidedObj.tag == "Obstacle") {
+            Destroy(collidedObj.gameObject.transform.parent.gameObject);
+        }
     }
 }
