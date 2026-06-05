@@ -468,6 +468,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pause Menu Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 3099584882278993866, guid: 615ae119a791f2943a8b1e49c00b17a2, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.4644657
+      objectReference: {fileID: 0}
+    - target: {fileID: 3099584882278993866, guid: 615ae119a791f2943a8b1e49c00b17a2, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.4644657
+      objectReference: {fileID: 0}
+    - target: {fileID: 3099584882278993866, guid: 615ae119a791f2943a8b1e49c00b17a2, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.4644657
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
