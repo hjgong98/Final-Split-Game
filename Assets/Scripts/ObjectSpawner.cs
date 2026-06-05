@@ -10,6 +10,8 @@ public class ObjectSpawner : MonoBehaviour
     private int objectSpawnCounterForObstacle;
     private float spawnBuffer;
 
+    public GameObject bomb;
+
     // Update is called once per frame
     void Update()
     {
@@ -20,7 +22,12 @@ public class ObjectSpawner : MonoBehaviour
 
             if (obstacleSpawnLimit == 2) {
                 if (objectSpawnCounterForObstacle > 6) {
-                    Instantiate(MetalObstacle, SpawnPoint.position, Quaternion.identity);
+                    bool spawnBomb = Random.Range(0, 2) == 0; // 50/50 bomb or metal obstacle
+                    if (spawnBomb) {
+                        Debug.Log("Spawning bomb: " + bomb);
+                        Instantiate(bomb, SpawnPoint.position, Quaternion.identity);
+                    } else
+                        Instantiate(MetalObstacle, SpawnPoint.position, Quaternion.identity);
                     objectSpawnCounterForObstacle = 0;
                 } else {
                     SpawnObject(objectRandomIdx);

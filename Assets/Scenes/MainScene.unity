@@ -5436,6 +5436,7 @@ MonoBehaviour:
   MetalObstacle: {fileID: 8470335172169014043, guid: 72d1880ddc7164619a912dce89b9a488, type: 3}
   SpawnPoint: {fileID: 1476976655}
   spawnInterval: 0.5
+  bomb: {fileID: 6806692337426309055, guid: 638d74f18ee124b19be1449b13093a2c, type: 3}
 --- !u!4 &517321609
 Transform:
   m_ObjectHideFlags: 0

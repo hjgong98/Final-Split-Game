@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Slice
   - Obstacle
+  - Bomb
   layers:
   - Default
   - TransparentFX
