@@ -105,6 +105,6 @@ public class PauseMenu : MonoBehaviour
             levelManager.ResumeGameFromButton();
         }
         
-        SceneManager.LoadScene("StartMenu");
+        SceneManager.LoadScene("Start Menu");
     }
 }
