@@ -4,40 +4,46 @@ using System.Collections;
 public class Bomb : MonoBehaviour
 {
     public int scorePenalty = 50;
-    private bool hasBeenHit = false;
+    private bool triggered = false;
 
-    void OnTriggerStay(Collider collidedObj) {
-        if (hasBeenHit) return;
-        if (collidedObj.name != "Cutter") return;
-
-        Knife knife = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Knife>();
-        if (knife == null || !knife.isCutting) return;
-
-        hasBeenHit = true;
-        GameSystem.System.LEVEL.ApplyBombPenalty(scorePenalty);
-        StartCoroutine(ShakeBomb());
+    private void Start()
+    {
+        Destroy(gameObject, 10f);
     }
 
-    IEnumerator ShakeBomb() {
-        MovableObject movable = GetComponent<MovableObject>();
-        movable.enabled = false;
+    private void OnTriggerEnter(Collider other)
+    {
+        if (triggered) return;
 
-        Vector3 origin = transform.position;
-        float duration = 0.5f;
-        float elapsed = 0f;
-        float magnitude = 40f;
+        // ONLY react to Cutter (same as your fruit system)
+        Cutter cutter = other.GetComponent<Cutter>();
+        if (cutter == null) return;
 
-        while (elapsed < duration) {
-            transform.position = new Vector3(
-                origin.x + Random.Range(-magnitude, magnitude),
-                origin.y + Random.Range(-magnitude, magnitude),
-                origin.z
-            );
-            elapsed += Time.deltaTime;
-            yield return null;
-        }
+        Knife knife = cutter.Knife.GetComponent<Knife>();
+        if (knife == null) return;
 
-        transform.position = origin;
-        movable.enabled = true;
+        if (!knife.isCutting) return;
+
+        triggered = true;
+
+        // stop movement
+        var mover = GetComponent<MovableObject>();
+        if (mover != null)
+            mover.enabled = false;
+
+        GameSystem.System.LEVEL.ApplyBombPenalty(scorePenalty);
+
+        StartCoroutine(Explode());
+    }
+
+    private IEnumerator Explode()
+    {
+        var r = GetComponent<MeshRenderer>();
+        if (r != null)
+            r.material.color = Color.red;
+
+        yield return new WaitForSeconds(0.15f);
+
+        Destroy(gameObject);
     }
 }
